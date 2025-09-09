@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>VidyaLeen - Login/Signup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --page-bg: #161a1e;
+      --container-bg: #1b232a;
+      --primary: #16bab3;
+      --primary-dark: #118a86;
+      --secondary: #12302d;
+      --accent: #ffffff;
+      --input-bg: #232b33;
+      --input-focus: #16bab3;
+      --button-bg: #16bab3;
+      --button-hover: #118a86;
+      --font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-body);
+    }
+
+    body {
+      background: var(--page-bg);
+      color: var(--primary);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background: var(--container-bg);
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+      width: 400px;
+      box-shadow: 0 0 8px rgba(22, 186, 179, 0.4);
+      color: var(--accent);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+      color: #a0f0ef;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 1.6rem;
+    }
+
+    .role-toggle {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.8rem;
+      border-radius: 30px;
+      background: var(--secondary);
+      box-shadow: inset 0 0 8px var(--input-focus);
+      color: var(--accent);
+    }
+
+    .role-toggle button {
+      flex: 1;
+      padding: 0.6rem 0;
+      border: none;
+      background: transparent;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border-radius: 30px;
+      transition: background 0.3s, color 0.3s;
+      outline: none;
+      color: var(--accent);
+    }
+
+    .role-toggle button.active {
+      background: var(--primary);
+      color: var(--page-bg);
+      box-shadow: 0 0 8px var(--primary);
+    }
+
+    form {
+      display: none;
+      flex-direction: column;
+      color: var(--accent);
+    }
+
+    form.active {
+      display: flex;
+    }
+
+    label {
+      margin-bottom: 0.3rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #a0d7d4;
+    }
+
+    input {
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--primary);
+      margin-bottom: 1.3rem;
+      background: var(--input-bg);
+      color: #d1f1ef;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--input-focus);
+    }
+
+    input::placeholder {
+      color: #9fe2df;
+      opacity: 1;
+    }
+
+    button.submit-btn,
+    button.send-otp-btn {
+      background: var(--button-bg);
+      color: var(--page-bg);
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 0 8px var(--primary-dark);
+      transition: background 0.3s;
+      margin-bottom: 1.3rem;
+    }
+
+    button.submit-btn:hover,
+    button.send-otp-btn:hover {
+      background: var(--button-hover);
+    }
+
+    input.otp-input {
+      letter-spacing: 3px;
+      font-weight: 600;
+      padding: 12px 18px;
+      text-align: center;
+      font-size: 1.1rem;
+      max-width: 180px;
+      margin: 0 auto 1.5rem auto;
+      display: block;
+      background: #1c3330;
+      color: var(--accent);
+      border-color: var(--input-focus);
+    }
+
+    .link-like {
+      color: #8ce1df;
+      text-align: center;
+      font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-bottom: 1.2rem;
+      user-select: none;
+    }
+
+    .forgot-link {
+      display: block;
+      text-align: right;
+      font-size: 0.95rem;
+      color: #73ccc9;
+      cursor: pointer;
+      text-decoration: underline;
+      margin-top: -1rem;
+      margin-bottom: 1.3rem;
+      user-select: none;
+    }
+
+    /* small responsive tweaks */
+    @media (max-width: 420px) {
+      .container {
+        width: 92%;
+        padding: 1.5rem;
+      }
+
+      header h1 {
+        font-size: 1.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="lang-toggle-wrap">
+    </div>
+    <header>
+      <h1 id="appName"></h1>
+      <p id="slogan"></p>
+    </header>
+    <div class="role-toggle" role="tablist">
+      <button id="student-role" class="active" role="tab" aria-selected="true"
+        aria-controls="student-panel">Student</button>
+      <button id="admin-role" role="tab" aria-selected="false" aria-controls="admin-panel">Administrator</button>
+    </div>
+    <div id="signToggle" class="link-like" role="link" tabindex="0"></div>
+
+    <!-- STUDENT SIGNIN -->
+    <form id="student-signin-form" class="active" role="tabpanel" aria-labelledby="student-role">
+      <label for="student-username" id="studentUserLabel"></label>
+      <input type="text" id="student-username" name="student-username" required placeholder="" />
+      <label for="student-password" id="studentPassLabel"></label>
+      <input type="password" id="student-password" name="student-password" required placeholder="" />
+      <span id="studentForgot" class="forgot-link" tabindex="0" role="link"></span>
+      <button type="submit" id="studentSignInBtn" class="submit-btn"></button>
+    </form>
+
+    <!-- STUDENT SIGNUP -->
+    <form id="student-signup-form" role="tabpanel" aria-labelledby="student-role" style="display:none;">
+      <label for="student-register-username" id="studentRegUserLabel"></label>
+      <input type="text" id="student-register-username" name="student-register-username" required placeholder="" />
+      <label for="student-register-password" id="studentRegPassLabel"></label>
+      <input type="password" id="student-register-password" name="student-register-password" required placeholder="" />
+      <label for="student-register-repassword" id="studentRegRepassLabel"></label>
+      <input type="password" id="student-register-repassword" name="student-register-repassword" required
+        placeholder="" />
+      <button type="button" id="studentSendOtp" class="send-otp-btn"></button>
+      <label for="student-otp" id="studentOtpLabel"></label>
+      <input type="text" id="student-otp" name="student-otp" maxlength="6" placeholder="" class="otp-input" />
+      <button type="submit" id="studentSignUpBtn" class="submit-btn"></button>
+      <div id="studentBackToSignin" tabindex="0" class="link-like">Back to Signin</div>
+    </form>
+
+    <!-- ADMIN SIGNIN -->
+    <form id="admin-signin-form" role="tabpanel" aria-labelledby="admin-role" style="display:none;">
+      <label for="admin-username" id="adminUserLabel"></label>
+      <input type="text" id="admin-username" name="admin-username" required placeholder="" />
+      <label for="admin-password" id="adminPassLabel"></label>
+      <input type="password" id="admin-password" name="admin-password" required placeholder="" />
+      <span id="adminForgot" class="forgot-link" tabindex="0" role="link"></span>
+      <button type="submit" id="adminSignInBtn" class="submit-btn"></button>
+    </form>
+
+    <!-- ADMIN SIGNUP -->
+    <form id="admin-signup-form" role="tabpanel" aria-labelledby="admin-role" style="display:none;">
+      <label for="admin-register-username" id="adminRegUserLabel"></label>
+      <input type="text" id="admin-register-username" name="admin-register-username" required placeholder="" />
+      <label for="admin-register-password" id="adminRegPassLabel"></label>
+      <input type="password" id="admin-register-password" name="admin-register-password" required placeholder="" />
+      <label for="admin-register-repassword" id="adminRegRepassLabel"></label>
+      <input type="password" id="admin-register-repassword" name="admin-register-repassword" required placeholder="" />
+      <button type="button" id="adminSendOtp" class="send-otp-btn"></button>
+      <label for="admin-otp" id="adminOtpLabel"></label>
+      <input type="text" id="admin-otp" name="admin-otp" maxlength="6" placeholder="" class="otp-input" />
+      <button type="submit" id="adminSignUpBtn" class="submit-btn"></button>
+      <div id="adminBackToSignin" tabindex="0" class="link-like">Back to Signin</div>
+    </form>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        appName: "Vidya Leen",
+        slogan: "Education for Everyone",
+        student: "Student",
+        administrator: "Administrator",
+        newUser: "New User? Sign Up",
+        login: "Sign In",
+        signup: "Sign Up",
+        password: "Password",
+        forgotPassword: "Forgot Password?",
+        mobileEmail: "Mobile Number or Email",
+        createPassword: "Create Password",
+        reenterPassword: "Re-enter Password",
+        sendOTP: "Send OTP",
+        enterOTP: "Enter OTP",
+        backToSignin: "Back to Signin",
+        signInBtn: "Sign In",
+        signUpBtn: "Sign Up",
+        adminSignInBtn: "Sign In",
+        adminSignUpBtn: "Sign Up"
+      },
+      hi: {
+        appName: "विद्या लीन",
+        slogan: "हर किसी के लिए शिक्षा",
+        student: "छात्र",
+        administrator: "प्रशासक",
+        newUser: "नया उपयोगकर्ता? साइनअप करें",
+        login: "साइन इन",
+        signup: "साइन अप",
+        password: "पासवर्ड",
+        forgotPassword: "पासवर्ड भूल गए?",
+        mobileEmail: "मोबाइल नंबर या ईमेल",
+        createPassword: "पासवर्ड बनाएं",
+        reenterPassword: "पासवर्ड फिर से दर्ज करें",
+        sendOTP: "ओटीपी भेजें",
+        enterOTP: "ओटीपी दर्ज करें",
+        backToSignin: "साइन इन पर वापस जाएं",
+        signInBtn: "साइन इन",
+        signUpBtn: "साइन अप",
+        adminSignInBtn: "साइन इन",
+        adminSignUpBtn: "साइन अप"
+      },
+      pa: {
+        appName: "ਵਿਦਿਆ ਲੀਨ",
+        slogan: "ਸਭ ਲਈ ਸਿੱਖਿਆ",
+        student: "ਵਿਦਿਆਰਥੀ",
+        administrator: "ਪ੍ਰਸ਼ਾਸਕ",
+        newUser: "ਨਵਾਂ ਉਪਭੋਗਤਾ? ਸਾਈਨ ਅੱਪ ਕਰੋ",
+        login: "ਸਾਈਨ ਇਨ",
+        signup: "ਸਾਈਨ ਅੱਪ",
+        password: "ਪਾਸਵਰਡ",
+        forgotPassword: "ਪਾਸਵਰਡ ਭੁੱਲ ਗਏ?",
+        mobileEmail: "ਮੋਬਾਈਲ ਨੰਬਰ ਜਾਂ ਈਮੇਲ",
+        createPassword: "ਪਾਸਵਰਡ ਬਣਾਓ",
+        reenterPassword: "ਪਾਸਵਰਡ ਮੁੜਦਰਜ ਕਰੋ",
+        sendOTP: "ਓਟੀਪੀ ਭੇਜੋ",
+        enterOTP: "ਓਟੀਪੀ ਦਰਜ ਕਰੋ",
+        backToSignin: "ਸਾਈਨ ਇਨ ਤੇ वापस ਜਾਓ",
+        signInBtn: "ਸਾਈਨ ਇਨ",
+        signUpBtn: "ਸਾਈਨ ਅੱਪ",
+        adminSignInBtn: "ਸਾਈਨ ਇਨ",
+        adminSignUpBtn: "ਸਾਈਨ ਅੱਪ"
+      }
+    };
+
+    let currentRole = 'student';
+    let studentShowingSignup = false;
+    let adminShowingSignup = false;
+    let currentLang = 'en';
+
+    // safe helper to set element text if exists
+    function setText(id, text) {
+      const el = document.getElementById(id);
+      if (el) el.innerText = text;
+    }
+    function setPlaceholder(id, text) {
+      const el = document.getElementById(id);
+      if (el) el.placeholder = text;
+    }
+
+    function updateLanguage(lang) {
+      if (!translations[lang]) lang = 'en';
+      currentLang = lang;
+      const t = translations[lang];
+
+      setText('appName', t.appName);
+      setText('slogan', t.slogan);
+      setText('student-role', t.student);
+      setText('admin-role', t.administrator);
+
+      // Toggle link initial text depends on whether showing signup for current role
+      setText('signToggle', (currentRole === 'student' ? (studentShowingSignup ? t.backToSignin : t.newUser) : (adminShowingSignup ? t.backToSignin : t.newUser)));
+
+      // Student Signin
+      setText('studentUserLabel', t.mobileEmail);
+      setText('studentPassLabel', t.password);
+      setText('studentForgot', t.forgotPassword);
+      setText('studentSignInBtn', t.signInBtn);
+      setPlaceholder('student-username', t.mobileEmail);
+      setPlaceholder('student-password', t.password);
+
+      // Student Signup
+      setText('studentRegUserLabel', t.mobileEmail);
+      setText('studentRegPassLabel', t.createPassword);
+      setText('studentRegRepassLabel', t.reenterPassword);
+      setText('studentSendOtp', t.sendOTP);
+      setText('studentOtpLabel', t.enterOTP);
+      setText('studentSignUpBtn', t.signUpBtn);
+      setPlaceholder('student-register-username', t.mobileEmail);
+      setPlaceholder('student-register-password', t.createPassword);
+      setPlaceholder('student-register-repassword', t.reenterPassword);
+      setPlaceholder('student-otp', t.enterOTP);
+      setText('studentBackToSignin', t.backToSignin);
+
+      // Admin Signin
+      setText('adminUserLabel', t.mobileEmail);
+      setText('adminPassLabel', t.password);
+      setText('adminForgot', t.forgotPassword);
+      setText('adminSignInBtn', t.signInBtn);
+      setPlaceholder('admin-username', t.mobileEmail);
+      setPlaceholder('admin-password', t.password);
+
+      // Admin Signup
+      setText('adminRegUserLabel', t.mobileEmail);
+      setText('adminRegPassLabel', t.createPassword);
+      setText('adminRegRepassLabel', t.reenterPassword);
+      setText('adminSendOtp', t.sendOTP);
+      setText('adminOtpLabel', t.enterOTP);
+      setText('adminSignUpBtn', t.signUpBtn);
+      setPlaceholder('admin-register-username', t.mobileEmail);
+      setPlaceholder('admin-register-password', t.createPassword);
+      setPlaceholder('admin-register-repassword', t.reenterPassword);
+      setPlaceholder('admin-otp', t.enterOTP);
+      setText('adminBackToSignin', t.backToSignin);
+    }
+
+    // toggle between student/admin roles and show the appropriate form
+    function showRole(role) {
+      currentRole = role;
+      // role buttons active state
+      document.getElementById('student-role').classList.toggle('active', role === 'student');
+      document.getElementById('admin-role').classList.toggle('active', role === 'admin');
+      document.getElementById('student-role').setAttribute('aria-selected', role === 'student');
+      document.getElementById('admin-role').setAttribute('aria-selected', role === 'admin');
+
+      // show/hide forms depending on role and signup flag
+      const studentSigninForm = document.getElementById('student-signin-form');
+      const studentSignupForm = document.getElementById('student-signup-form');
+      const adminSigninForm = document.getElementById('admin-signin-form');
+      const adminSignupForm = document.getElementById('admin-signup-form');
+
+      if (role === 'student') {
+        studentSigninForm.style.display = studentShowingSignup ? 'none' : 'flex';
+        studentSignupForm.style.display = studentShowingSignup ? 'flex' : 'none';
+        adminSigninForm.style.display = 'none';
+        adminSignupForm.style.display = 'none';
+      } else {
+        adminSigninForm.style.display = adminShowingSignup ? 'none' : 'flex';
+        adminSignupForm.style.display = adminShowingSignup ? 'flex' : 'none';
+        studentSigninForm.style.display = 'none';
+        studentSignupForm.style.display = 'none';
+      }
+
+      // update signToggle text for the current language and role
+      const t = translations[currentLang] || translations['en'];
+      const signToggleEl = document.getElementById('signToggle');
+      if (role === 'student') signToggleEl.innerText = studentShowingSignup ? t.backToSignin : t.newUser;
+      else signToggleEl.innerText = adminShowingSignup ? t.backToSignin : t.newUser;
+    }
+
+    // toggle sign in / sign up for current role
+    function toggleSigninSignup() {
+      const t = translations[currentLang] || translations['en'];
+      const signToggleEl = document.getElementById('signToggle');
+      if (currentRole === 'student') {
+        studentShowingSignup = !studentShowingSignup;
+        showRole('student');
+        signToggleEl.innerText = studentShowingSignup ? t.backToSignin : t.newUser;
+      } else {
+        adminShowingSignup = !adminShowingSignup;
+        showRole('admin');
+        signToggleEl.innerText = adminShowingSignup ? t.backToSignin : t.newUser;
+      }
+    }
+    
+    // Handle signin for both roles and pass language
+    function handleSignIn(e) {
+      e.preventDefault();
+      const isStudent = currentRole === 'student';
+      const dashboardPage = isStudent ? 'studentDashboard.html' : 'teacherDashboard.html';
+      
+      // Simulate successful login and open the dashboard
+      const dashboardWindow = window.open(dashboardPage, '_blank');
+      
+      // Use a timeout to ensure the new window is ready to receive messages
+      setTimeout(() => {
+        dashboardWindow.postMessage({
+          type: 'languageChanged',
+          lang: currentLang
+        }, '*');
+      }, 500); 
+    }
+
+    // Initialize handlers
+    window.addEventListener('load', () => {
+      // initial language, this will be overwritten by a message from index.html if it exists
+      updateLanguage('en');
+
+      // language change
+      window.addEventListener('message', (e) => {
+        if (e.data?.type === 'languageChanged') {
+          updateLanguage(e.data.lang);
+        }
+      });
+      
+      // role switching
+      const studentBtn = document.getElementById('student-role');
+      const adminBtn = document.getElementById('admin-role');
+      studentBtn.addEventListener('click', () => showRole('student'));
+      adminBtn.addEventListener('click', () => showRole('admin'));
+
+      // signToggle click (switch between signin/signup for active role)
+      const signToggleEl = document.getElementById('signToggle');
+      signToggleEl.addEventListener('click', toggleSigninSignup);
+      signToggleEl.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') toggleSigninSignup(); });
+
+      // back to signin inside signup forms
+      const studentBack = document.getElementById('studentBackToSignin');
+      if (studentBack) {
+        studentBack.addEventListener('click', () => { studentShowingSignup = false; showRole('student'); });
+      }
+      const adminBack = document.getElementById('adminBackToSignin');
+      if (adminBack) {
+        adminBack.addEventListener('click', () => { adminShowingSignup = false; showRole('admin'); });
+      }
+
+      // Add the new sign-in event listeners
+      document.getElementById('student-signin-form').addEventListener('submit', handleSignIn);
+      document.getElementById('admin-signin-form').addEventListener('submit', handleSignIn);
+    });
+
+  </script>
+</body>
+
+</html>

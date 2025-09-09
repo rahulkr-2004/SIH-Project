@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+
+        /* Custom scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2c2c2c;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #444;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-[#111111] p-6 flex flex-col items-center shadow-lg">
+        <div class="flex items-center mb-10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#00E5C9]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap"><path d="M21.42 10.922a1 1 0 0 0-.01-1.843L14.444 6.34a1 1 0 0 0-.894 0L7.6 9.078a1 1 0 0 0-.01 1.843l6.96 3.738a1 1 0 0 0 .894 0z"/><path d="M10.74 15.656 7.6 13.922a1 1 0 0 1-.6-.893v-3.46a1 1 0 0 1 .6-.895l3.14-1.734a1 1 0 0 1 1 0l3.14 1.734a1 1 0 0 1 .6.894v3.46a1 1 0 0 1-.6.895l-3.14 1.734a1 1 0 0 1-1 0z"/><path d="M12 22a7 7 0 1 0 0-14 7 7 0 0 0 0 14z"/><circle cx="12" cy="12" r="7"/><path d="M12 21v1"/><path d="M15.4 17.5a9.42 9.42 0 0 1-6.8 0"/><path d="M12 8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/><path d="m14.922 15.656-2.922 1.568V12z"/></svg>
+            <span class="text-2xl font-bold ml-2 text-white">VIDYA LEEN</span>
+        </div>
+        <nav class="w-full flex-grow">
+            <ul class="space-y-4">
+                <li>
+                    <a href="#" class="nav-item flex items-center p-3 text-white bg-[#00e5c9] bg-opacity-10 rounded-xl hover:bg-opacity-20 transition-colors" data-tab="dashboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-[#00E5C9]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+                        <span data-lang-key="dashboard">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-item flex items-center p-3 text-gray-400 rounded-xl hover:bg-[#00e5c9] hover:bg-opacity-10 hover:text-white transition-colors" data-tab="modules">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        <span data-lang-key="modules">Modules</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-item flex items-center p-3 text-gray-400 rounded-xl hover:bg-[#00e5c9] hover:bg-opacity-10 hover:text-white transition-colors" data-tab="quizzes">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-check"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>
+                        <span data-lang-key="quizzes">Quizzes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-item flex items-center p-3 text-gray-400 rounded-xl hover:bg-[#00e5c9] hover:bg-opacity-10 hover:text-white transition-colors" data-tab="activity">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        <span data-lang-key="your-activity">Your Activity</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="mt-auto w-full">
+            <a href="#" class="flex items-center justify-center p-3 text-gray-400 rounded-xl hover:bg-[#00e5c9] hover:bg-opacity-10 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                <span data-lang-key="log-out">Log Out</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8 overflow-y-auto">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-10">
+            <h1 class="text-3xl font-bold text-white" data-lang-key="dashboard">Dashboard</h1>
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-400" id="current-language">English</span>
+                <span class="text-gray-400">|</span>
+                <div class="flex items-center space-x-2">
+                    <img src="https://placehold.co/40x40/2c2c2c/666?text=U" alt="User Profile" class="w-10 h-10 rounded-full border border-[#00e5c9]">
+                    <span class="font-semibold text-white">Rahul K.</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tab Content -->
+        <div id="dashboard-content" class="tab-content active">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-[#2a2a2a] p-6 rounded-2xl shadow-md flex flex-col items-start">
+                    <p class="text-gray-400" data-lang-key="total-modules">Total Modules</p>
+                    <p class="text-4xl font-bold text-white mt-2">12</p>
+                </div>
+                <div class="bg-[#2a2a2a] p-6 rounded-2xl shadow-md flex flex-col items-start">
+                    <p class="text-gray-400" data-lang-key="quizzes-completed">Quizzes Completed</p>
+                    <p class="text-4xl font-bold text-white mt-2">8</p>
+                </div>
+                <div class="bg-[#2a2a2a] p-6 rounded-2xl shadow-md flex flex-col items-start">
+                    <p class="text-gray-400" data-lang-key="average-score">Average Score</p>
+                    <p class="text-4xl font-bold text-white mt-2">91%</p>
+                </div>
+            </div>
+
+            <div class="bg-[#2a2a2a] p-6 rounded-2xl shadow-md">
+                <h2 class="text-xl font-semibold mb-4 text-white" data-lang-key="recent-activity">Recent Activity</h2>
+                <ul class="space-y-4">
+                    <li class="flex items-center justify-between p-4 bg-[#333333] rounded-xl">
+                        <div class="flex items-center space-x-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#00E5C9]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-check"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>
+                            <div>
+                                <p class="text-white" data-lang-key="completed-quiz-data-structures">Completed Quiz: Data Structures</p>
+                                <p class="text-sm text-gray-400" data-lang-key="score-95">Score: 95%</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-400" data-lang-key="2-hours-ago">2 hours ago</span>
+                    </li>
+                    <li class="flex items-center justify-between p-4 bg-[#333333] rounded-xl">
+                        <div class="flex items-center space-x-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#00E5C9]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                            <div>
+                                <p class="text-white" data-lang-key="started-module-ethical-hacking">Started Module: Ethical Hacking</p>
+                                <p class="text-sm text-gray-400" data-lang-key="progress-10">Progress: 10%</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-400" data-lang-key="1-day-ago">1 day ago</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="modules-content" class="tab-content hidden">
+            <h2 class="text-2xl font-bold text-white mb-6" data-lang-key="modules">Modules</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Module Card 1 -->
+                <div class="bg-[#2a2a2a] p-6 rounded-2xl shadow-md">
+                    <h3 class="text-lg font-semibold text-white mb-2" data-lang-key="introduction-to-cybersecurity">Introduction to Cybersecurity</h3>
+                    <p class="text-gray-400 text-sm mb-4" data-lang-key="learn-cybersecurity-fundamentals">Learn the fundamentals of cybersecurity and network security.</p>
+                    <div class="w-full bg-gray-600 rounded-full h-2.5 mb-2">
+                        <div class="bg-[#00E5C9] h-2.5 rounded-full" style="width: 75%"></div>
+                    </div>
+                    <p class="text-sm text-gray-400" data-lang-key="75-percent-complete">75% Complete</p>
+                </div>
+                <!-- Module Card 2 -->
+                <div class="bg-[#2a2a2a] p-6 rounded-2xl shadow-md">
+                    <h3 class="text-lg font-semibold text-white mb-2" data-lang-key="java-backend-development">Java Backend Development</h3>
+                    <p class="text-gray-400 text-sm mb-4" data-lang-key="master-java-backend">Master Java for building scalable backend applications.</p>
+                    <div class="w-full bg-gray-600 rounded-full h-2.5 mb-2">
+                        <div class="bg-[#00E5C9] h-2.5 rounded-full" style="width: 50%"></div>
+                    </div>
+                    <p class="text-sm text-gray-400" data-lang-key="50-percent-complete">50% Complete</p>
+                </div>
+                <!-- Module Card 3 -->
+                <div class="bg-[#2a2a2a] p-6 rounded-2xl shadow-md">
+                    <h3 class="text-lg font-semibold text-white mb-2" data-lang-key="data-structures-and-algorithms">Data Structures and Algorithms</h3>
+                    <p class="text-gray-400 text-sm mb-4" data-lang-key="essential-concepts-problem-solving">Essential concepts for efficient problem-solving and coding.</p>
+                    <div class="w-full bg-gray-600 rounded-full h-2.5 mb-2">
+                        <div class="bg-[#00E5C9] h-2.5 rounded-full" style="width: 90%"></div>
+                    </div>
+                    <p class="text-sm text-gray-400" data-lang-key="90-percent-complete">90% Complete</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="quizzes-content" class="tab-content hidden">
+            <h2 class="text-2xl font-bold text-white mb-6" data-lang-key="quizzes">Quizzes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Quiz Card 1 -->
+                <div class="bg-[#2a2a2a] p-6 rounded-2xl shadow-md">
+                    <h3 class="text-lg font-semibold text-white mb-2" data-lang-key="cybersecurity-fundamentals">Cybersecurity Fundamentals</h3>
+                    <p class="text-gray-400 text-sm mb-4" data-lang-key="test-cybersecurity-basics">Test your knowledge on cybersecurity basics.</p>
+                    <span class="bg-[#00E5C9] text-[#1a1a1a] font-bold text-sm px-4 py-1 rounded-full" data-lang-key="completed">Completed</span>
+                    <p class="text-sm text-gray-400 mt-2" data-lang-key="score-92">Score: 92%</p>
+                </div>
+                <!-- Quiz Card 2 -->
+                <div class="bg-[#2a2a2a] p-6 rounded-2xl shadow-md">
+                    <h3 class="text-lg font-semibold text-white mb-2" data-lang-key="java-core-concepts">Java Core Concepts</h3>
+                    <p class="text-gray-400 text-sm mb-4" data-lang-key="assess-java-skills">Assess your skills in core Java programming.</p>
+                    <span class="bg-gray-600 text-gray-300 font-bold text-sm px-4 py-1 rounded-full" data-lang-key="not-attempted">Not Attempted</span>
+                </div>
+                <!-- Quiz Card 3 -->
+                <div class="bg-[#2a2a2a] p-6 rounded-2xl shadow-md">
+                    <h3 class="text-lg font-semibold text-white mb-2" data-lang-key="network-protocols-quiz">Network Protocols Quiz</h3>
+                    <p class="text-gray-400 text-sm mb-4" data-lang-key="short-quiz-protocols">A short quiz on common network protocols.</p>
+                    <span class="bg-[#f0ad4e] text-[#1a1a1a] font-bold text-sm px-4 py-1 rounded-full" data-lang-key="in-progress">In Progress</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="activity-content" class="tab-content hidden">
+            <h2 class="text-2xl font-bold text-white mb-6" data-lang-key="your-activity">Your Activity</h2>
+            <div class="bg-[#2a2a2a] p-6 rounded-2xl shadow-md">
+                <ul class="space-y-4">
+                    <li class="flex items-center justify-between p-4 bg-[#333333] rounded-xl">
+                        <div class="flex items-center space-x-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#00E5C9]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                            <div>
+                                <p class="text-white" data-lang-key="opened-data-structures">Opened "Introduction to Data Structures"</p>
+                                <p class="text-sm text-gray-400" data-lang-key="progress-updated-75">Progress updated to 75%</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-400" data-lang-key="45-minutes-ago">45 minutes ago</span>
+                    </li>
+                    <li class="flex items-center justify-between p-4 bg-[#333333] rounded-xl">
+                        <div class="flex items-center space-x-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#00E5C9]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-check"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>
+                            <div>
+                                <p class="text-white" data-lang-key="submitted-java-concepts">Submitted "Java Core Concepts Quiz"</p>
+                                <p class="text-sm text-gray-400" data-lang-key="received-score-88">Received a score of 88%</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-400" data-lang-key="1-day-ago">1 day ago</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <script>
+        const translations = {
+            en: {
+                "dashboard": "Dashboard",
+                "modules": "Modules",
+                "quizzes": "Quizzes",
+                "your-activity": "Your Activity",
+                "log-out": "Log Out",
+                "total-modules": "Total Modules",
+                "quizzes-completed": "Quizzes Completed",
+                "average-score": "Average Score",
+                "recent-activity": "Recent Activity",
+                "completed-quiz-data-structures": "Completed Quiz: Data Structures",
+                "score-95": "Score: 95%",
+                "2-hours-ago": "2 hours ago",
+                "started-module-ethical-hacking": "Started Module: Ethical Hacking",
+                "progress-10": "Progress: 10%",
+                "1-day-ago": "1 day ago",
+                "introduction-to-cybersecurity": "Introduction to Cybersecurity",
+                "learn-cybersecurity-fundamentals": "Learn the fundamentals of cybersecurity and network security.",
+                "75-percent-complete": "75% Complete",
+                "java-backend-development": "Java Backend Development",
+                "master-java-backend": "Master Java for building scalable backend applications.",
+                "50-percent-complete": "50% Complete",
+                "data-structures-and-algorithms": "Data Structures and Algorithms",
+                "essential-concepts-problem-solving": "Essential concepts for efficient problem-solving and coding.",
+                "90-percent-complete": "90% Complete",
+                "cybersecurity-fundamentals": "Cybersecurity Fundamentals",
+                "test-cybersecurity-basics": "Test your knowledge on cybersecurity basics.",
+                "completed": "Completed",
+                "score-92": "Score: 92%",
+                "java-core-concepts": "Java Core Concepts",
+                "assess-java-skills": "Assess your skills in core Java programming.",
+                "not-attempted": "Not Attempted",
+                "network-protocols-quiz": "Network Protocols Quiz",
+                "short-quiz-protocols": "A short quiz on common network protocols.",
+                "in-progress": "In Progress",
+                "opened-data-structures": "Opened \"Introduction to Data Structures\"",
+                "progress-updated-75": "Progress updated to 75%",
+                "45-minutes-ago": "45 minutes ago",
+                "submitted-java-concepts": "Submitted \"Java Core Concepts Quiz\"",
+                "received-score-88": "Received a score of 88%"
+            },
+            hi: {
+                "dashboard": "डैशबोर्ड",
+                "modules": "मॉड्यूल",
+                "quizzes": "क्विज़",
+                "your-activity": "आपकी गतिविधि",
+                "log-out": "लॉग आउट",
+                "total-modules": "कुल मॉड्यूल",
+                "quizzes-completed": "पूरे किए गए क्विज़",
+                "average-score": "औसत स्कोर",
+                "recent-activity": "हाल की गतिविधि",
+                "completed-quiz-data-structures": "क्विज़ पूरी हुई: डेटा संरचनाएं",
+                "score-95": "स्कोर: 95%",
+                "2-hours-ago": "2 घंटे पहले",
+                "started-module-ethical-hacking": "मॉड्यूल शुरू किया: एथिकल हैकिंग",
+                "progress-10": "प्रगति: 10%",
+                "1-day-ago": "1 दिन पहले",
+                "introduction-to-cybersecurity": "साइबर सुरक्षा का परिचय",
+                "learn-cybersecurity-fundamentals": "साइबर सुरक्षा और नेटवर्क सुरक्षा के मूल सिद्धांतों को जानें।",
+                "75-percent-complete": "75% पूरा हुआ",
+                "java-backend-development": "जावा बैकएंड विकास",
+                "master-java-backend": "स्केलेबल बैकएंड एप्लिकेशन बनाने के लिए जावा में महारत हासिल करें।",
+                "50-percent-complete": "50% पूरा हुआ",
+                "data-structures-and-algorithms": "डेटा संरचनाएं और एल्गोरिदम",
+                "essential-concepts-problem-solving": "कुशल समस्या-समाधान और कोडिंग के लिए आवश्यक अवधारणाएं।",
+                "90-percent-complete": "90% पूरा हुआ",
+                "cybersecurity-fundamentals": "साइबर सुरक्षा के मूल सिद्धांत",
+                "test-cybersecurity-basics": "साइबर सुरक्षा की अपनी जानकारी का परीक्षण करें।",
+                "completed": "पूरा हुआ",
+                "score-92": "स्कोर: 92%",
+                "java-core-concepts": "जावा कोर अवधारणाएं",
+                "assess-java-skills": "कोर जावा प्रोग्रामिंग में अपने कौशल का आकलन करें।",
+                "not-attempted": "प्रयास नहीं किया",
+                "network-protocols-quiz": "नेटवर्क प्रोटोकॉल क्विज़",
+                "short-quiz-protocols": "सामान्य नेटवर्क प्रोटोकॉल पर एक छोटा क्विज़।",
+                "in-progress": "प्रगति में है",
+                "opened-data-structures": "\"डेटा संरचनाओं का परिचय\" खोला",
+                "progress-updated-75": "प्रगति 75% तक अद्यतन की गई",
+                "45-minutes-ago": "45 मिनट पहले",
+                "submitted-java-concepts": "\"जावा कोर अवधारणाएं क्विज़\" सबमिट किया",
+                "received-score-88": "88% का स्कोर प्राप्त हुआ"
+            },
+            pa: {
+                "dashboard": "ਡੈਸ਼ਬੋਰਡ",
+                "modules": "ਮਾਡਿਊਲ",
+                "quizzes": "ਕਵਿਜ਼ਾਂ",
+                "your-activity": "ਤੁਹਾਡੀ ਗਤੀਵਿਧੀ",
+                "log-out": "ਲਾਗ ਆਉਟ",
+                "total-modules": "ਕੁੱਲ ਮਾਡਿਊਲ",
+                "quizzes-completed": "ਕਵਿਜ਼ਾਂ ਪੂਰੀਆਂ ਹੋਈਆਂ",
+                "average-score": "ਔਸਤ ਸਕੋਰ",
+                "recent-activity": "ਹਾਲੀਆ ਗਤੀਵਿਧੀ",
+                "completed-quiz-data-structures": "ਕਵਿਜ਼ ਪੂਰੀ ਹੋਈ: ਡਾਟਾ ਬਣਤਰਾਂ",
+                "score-95": "ਸਕੋਰ: 95%",
+                "2-hours-ago": "2 ਘੰਟੇ ਪਹਿਲਾਂ",
+                "started-module-ethical-hacking": "ਮਾਡਿਊਲ ਸ਼ੁਰੂ ਕੀਤਾ: ਨੈਤਿਕ ਹੈਕਿੰਗ",
+                "progress-10": "ਪ੍ਰਗਤੀ: 10%",
+                "1-day-ago": "1 ਦਿਨ ਪਹਿਲਾਂ",
+                "introduction-to-cybersecurity": "ਸਾਈਬਰ ਸੁਰੱਖਿਆ ਨਾਲ ਜਾਣ-ਪਛਾਣ",
+                "learn-cybersecurity-fundamentals": "ਸਾਈਬਰ ਸੁਰੱਖਿਆ ਅਤੇ ਨੈੱਟਵਰਕ ਸੁਰੱਖਿਆ ਦੇ ਬੁਨਿਆਦੀ ਸਿਧਾਂਤਾਂ ਨੂੰ ਜਾਣੋ।",
+                "75-percent-complete": "75% ਪੂਰਾ ਹੋਇਆ",
+                "java-backend-development": "ਜਾਵਾ ਬੈਕਐਂਡ ਵਿਕਾਸ",
+                "master-java-backend": "ਸਕੇਲੇਬਲ ਬੈਕਐਂਡ ਐਪਲੀਕੇਸ਼ਨਾਂ ਬਣਾਉਣ ਲਈ ਜਾਵਾ ਵਿੱਚ ਮਹਾਰਤ ਹਾਸਲ ਕਰੋ।",
+                "50-percent-complete": "50% ਪੂਰਾ ਹੋਇਆ",
+                "data-structures-and-algorithms": "ਡਾਟਾ ਬਣਤਰਾਂ ਅਤੇ ਐਲਗੋਰਿਦਮ",
+                "essential-concepts-problem-solving": "ਕੁਸ਼ਲ ਸਮੱਸਿਆ-ਹੱਲ ਕਰਨ ਅਤੇ ਕੋਡਿੰਗ ਲਈ ਜ਼ਰੂਰੀ ਧਾਰਨਾਵਾਂ।",
+                "90-percent-complete": "90% ਪੂਰਾ ਹੋਇਆ",
+                "cybersecurity-fundamentals": "ਸਾਈਬਰ ਸੁਰੱਖਿਆ ਦੇ ਬੁਨਿਆਦੀ ਸਿਧਾਂਤ",
+                "test-cybersecurity-basics": "ਸਾਈਬਰ ਸੁਰੱਖਿਆ ਬਾਰੇ ਆਪਣੇ ਗਿਆਨ ਦੀ ਜਾਂਚ ਕਰੋ।",
+                "completed": "ਪੂਰਾ ਹੋਇਆ",
+                "score-92": "ਸਕੋਰ: 92%",
+                "java-core-concepts": "ਜਾਵਾ ਕੋਰ ਧਾਰਨਾਵਾਂ",
+                "assess-java-skills": "ਕੋਰ ਜਾਵਾ ਪ੍ਰੋਗਰਾਮਿੰਗ ਵਿੱਚ ਆਪਣੇ ਹੁਨਰਾਂ ਦਾ ਮੁਲਾਂਕਣ ਕਰੋ।",
+                "not-attempted": "ਕੋਸ਼ਿਸ਼ ਨਹੀਂ ਕੀਤੀ ਗਈ",
+                "network-protocols-quiz": "ਨੈੱਟਵਰਕ ਪ੍ਰੋਟੋਕੋਲ ਕਵਿਜ਼",
+                "short-quiz-protocols": "ਆਮ ਨੈੱਟਵਰਕ ਪ੍ਰੋਟੋਕੋਲ 'ਤੇ ਇੱਕ ਛੋਟੀ ਕਵਿਜ਼।",
+                "in-progress": "ਪ੍ਰਗਤੀ ਵਿੱਚ ਹੈ",
+                "opened-data-structures": "\"ਡਾਟਾ ਬਣਤਰਾਂ ਦਾ ਪਰਿਚੈ\" ਖੋਲ੍ਹਿਆ",
+                "progress-updated-75": "ਪ੍ਰਗਤੀ 75% ਤੱਕ ਅਪਡੇਟ ਕੀਤੀ ਗਈ",
+                "45-minutes-ago": "45 ਮਿੰਟ ਪਹਿਲਾਂ",
+                "submitted-java-concepts": "\"ਜਾਵਾ ਕੋਰ ਧਾਰਨਾਵਾਂ ਕਵਿਜ਼\" ਸਬਮਿਟ ਕੀਤਾ",
+                "received-score-88": "88% ਦਾ ਸਕੋਰ ਪ੍ਰਾਪਤ ਹੋਇਆ"
+            }
+        };
+        const langMap = {
+            'en': 'English',
+            'hi': 'हिन्दी',
+            'pa': 'ਪੰਜਾਬੀ'
+        };
+
+        const elementsToTranslate = document.querySelectorAll('[data-lang-key]');
+
+        function setLanguage(lang) {
+            if (translations[lang]) {
+                elementsToTranslate.forEach(el => {
+                    const key = el.dataset.langKey;
+                    if (translations[lang][key]) {
+                        el.textContent = translations[lang][key];
+                    }
+                });
+                document.getElementById('current-language').textContent = langMap[lang];
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('.nav-item');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    const targetTab = e.target.closest('.nav-item').dataset.tab;
+
+                    // Remove active styles from all nav items
+                    navItems.forEach(nav => {
+                        nav.classList.remove('bg-opacity-10', 'bg-[#00e5c9]', 'text-white');
+                        nav.classList.add('text-gray-400');
+                        nav.querySelector('svg').classList.remove('text-[#00E5C9]');
+                        nav.querySelector('svg').classList.add('text-gray-400');
+                    });
+
+                    // Add active styles to the clicked item
+                    e.target.closest('.nav-item').classList.add('bg-opacity-10', 'bg-[#00e5c9]', 'text-white');
+                    e.target.closest('.nav-item').classList.remove('text-gray-400');
+                    e.target.closest('.nav-item').querySelector('svg').classList.add('text-[#00E5C9]');
+                    e.target.closest('.nav-item').querySelector('svg').classList.remove('text-gray-400');
+
+                    // Hide all tab content and show the selected one
+                    tabContents.forEach(content => {
+                        content.classList.add('hidden');
+                    });
+                    document.getElementById(`${targetTab}-content`).classList.remove('hidden');
+                });
+            });
+
+            // Set initial language from message, or fallback to English
+            window.addEventListener('message', (e) => {
+                if (e.data && e.data.type === 'languageChanged') {
+                    setLanguage(e.data.lang);
+                }
+            });
+
+            // Fallback to English after a short delay if no message is received
+            setTimeout(() => {
+                const currentLang = document.getElementById('current-language').textContent;
+                if (currentLang === 'English') {
+                    setLanguage('en');
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>

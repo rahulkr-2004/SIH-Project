@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internet Safety & Online Communication Module</title>
+  <style>
+    :root {
+      --bg: #090e13;
+      --teal: #15e3c7;
+      --teal-hover: #17c1a6;
+      --white: #fff;
+      --card-dark: #10161b;
+      --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --btn-radius: 8px;
+    }
+    body {
+      margin: 0;
+      font-family: var(--main-font);
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+    }
+    header {
+      padding: 2rem 4vw 1rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      color: var(--teal);
+      margin-bottom: 0.25rem;
+      font-weight: 700;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #bfeff6;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto 3rem;
+      padding: 0 1rem;
+    }
+    section.module {
+      background: var(--card-dark);
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.6rem;
+      border-radius: var(--btn-radius);
+      box-shadow: 0 0 10px #0b1e23;
+    }
+    section.module > h2 {
+      font-size: 1.7rem;
+      cursor: pointer;
+      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      font-weight: 600;
+    }
+    section.module > h2 .arrow {
+      transition: transform 0.3s ease;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+    section.module.expanded > h2 .arrow {
+      transform: rotate(90deg);
+      color: var(--teal);
+    }
+    div.module-content {
+      margin-top: 1rem;
+      color: #ccc;
+      font-size: 1rem;
+      display: none;
+    }
+    section.module.expanded > div.module-content {
+      display: block;
+    }
+
+    /* Subtopic Accordion */
+    .subtopics {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 1rem;
+    }
+    .subtopics li {
+      background: #15232b;
+      border-radius: 5px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      font-weight: 500;
+    }
+    .subtopics li .sub-arrow {
+      transition: transform 0.3s ease;
+      font-size: 1rem;
+      font-weight: bold;
+      color: var(--teal);
+    }
+    .subtopics li.expanded {
+      background: #1f3845;
+    }
+    .subtopics li.expanded .sub-arrow {
+      transform: rotate(90deg);
+    }
+    .sub-content {
+      background: #101b23;
+      border-radius: 0 0 5px 5px;
+      padding: 1rem 1.5rem;
+      margin-top: -8px;
+      color: #bcd3de;
+      display: none;
+      font-size: 0.97rem;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+    .subtopics li.expanded + .sub-content {
+      display: block;
+    }
+
+    .quiz-question {
+      margin: 1.3rem 0 0.6rem;
+    }
+    .quiz-options label {
+      display: block;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+    }
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+    .quiz-btn {
+      background: var(--teal);
+      color: var(--bg);
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: var(--btn-radius);
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.7rem;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .quiz-btn:hover {
+      background: var(--teal-hover);
+      color: var(--white);
+    }
+    .quiz-result {
+      margin-top: 0.6rem;
+      font-weight: 600;
+    }
+    .correct {
+      color: #2ecc71;
+    }
+    .incorrect {
+      color: #e74c3c;
+    }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      main {
+        padding: 0 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Internet Safety & Online Communication</h1>
+    <p>Master the essentials for staying safe online and communicating confidently and responsibly in the digital world.</p>
+  </header>
+  <main>
+    <section class="module">
+      <h2>1. Online Safety Basics <span class="arrow">▶</span></h2>
+      <div class="module-content">
+        <ul class="subtopics">
+          <li>
+            Why is Internet Safety Important? <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Threats on the internet include viruses, malware, scams, identity theft, and cyberbullying. Practicing internet safety helps protect your personal data, devices, and reputation from such digital dangers. It also prevents financial loss and emotional distress.
+          </div>
+
+          <li>
+            Creating Strong Passwords <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Use at least 8 characters with upper/lowercase letters, numbers, and special symbols. Avoid obvious choices like names, birthdays, or "password." Change passwords regularly and use different passwords for different sites. Consider a trusted password manager.
+          </div>
+
+          <li>
+            Identifying Safe Websites <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Check for "https://" in the URL, a padlock symbol, and well-known domains. Be cautious of popups, misspellings, or requests for personal info. Do not download files from unknown sources.
+          </div>
+        </ul>
+        <div class="quiz-question">Which of these is the safest password?</div>
+        <div class="quiz-options">
+          <label><input type="radio" name="q1" value="incorrect" /> abc12345</label>
+          <label><input type="radio" name="q1" value="incorrect" /> myname2001</label>
+          <label><input type="radio" name="q1" value="correct" /> Gt@4b!wM#2</label>
+        </div>
+        <button class="quiz-btn" onclick="checkAnswer('q1')">Check Answer</button>
+        <div class="quiz-result" id="result-q1"></div>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2>2. Cyber Threats & Safe Practices <span class="arrow">▶</span></h2>
+      <div class="module-content">
+        <ul class="subtopics">
+          <li>
+            Phishing & Scams <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Phishing involves fake emails or websites try to trick you into giving up passwords, bank details, or confidential info. Always check the sender, don’t click on suspicious links, and never share private details with untrusted contacts.
+          </div>
+          <li>
+            Secure Browsing & Devices <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Regularly update your browser and antivirus. Log out of websites after use. Avoid using public WiFi for sensitive transactions. Use two-factor authentication when possible.
+          </div>
+          <li>
+            Protecting Personal Info <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Don't overshare personal images or location online, particularly on social media. Use privacy settings and be conscious of your digital footprint.
+          </div>
+        </ul>
+        <div class="quiz-question">What is phishing?</div>
+        <div class="quiz-options">
+          <label><input type="radio" name="q2" value="correct" /> Attempt to steal info by pretending to be trustworthy</label>
+          <label><input type="radio" name="q2" value="incorrect" /> Sending fun memes to friends</label>
+          <label><input type="radio" name="q2" value="incorrect" /> Downloading photos online</label>
+        </div>
+        <button class="quiz-btn" onclick="checkAnswer('q2')">Check Answer</button>
+        <div class="quiz-result" id="result-q2"></div>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2>3. Responsible Online Communication <span class="arrow">▶</span></h2>
+      <div class="module-content">
+        <ul class="subtopics">
+          <li>
+            Netiquette & Respect <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Always be polite online, whether posting publicly or chatting privately. Avoid using all-caps (it means "shouting"), respect opinions, and never bully, threat or harass others.
+          </div>
+          <li>
+            Privacy in Messaging & Social Media <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Set your social media posts and groups to “private” or “friends only.” Never publish sensitive information in public spaces.
+          </div>
+          <li>
+            Verifying Information <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Before sharing articles or images, make sure they're accurate and not fake news or misleading. Use reliable news sites and fact-checking tools.
+          </div>
+        </ul>
+        <div class="quiz-question">What is good netiquette?</div>
+        <div class="quiz-options">
+          <label><input type="radio" name="q3" value="correct" /> Being respectful, clear and never bullying</label>
+          <label><input type="radio" name="q3" value="incorrect" /> Shouting and always forwarding messages</label>
+          <label><input type="radio" name="q3" value="incorrect" /> Never replying to anyone</label>
+        </div>
+        <button class="quiz-btn" onclick="checkAnswer('q3')">Check Answer</button>
+        <div class="quiz-result" id="result-q3"></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    // Main accordion for modules
+    document.querySelectorAll('section.module > h2').forEach(header => {
+      header.addEventListener('click', () => {
+        header.parentElement.classList.toggle('expanded');
+      });
+    });
+    // Accordion for subtopics
+    document.querySelectorAll('.subtopics > li').forEach(item => {
+      item.addEventListener('click', function(e) {
+        // Prevent parent module accordion toggling
+        e.stopPropagation();
+        this.classList.toggle('expanded');
+      });
+    });
+    // Quiz answer checking
+    function checkAnswer(questionName) {
+      const options = document.getElementsByName(questionName);
+      let resultEl = document.getElementById('result-' + questionName);
+      let selected = null;
+      options.forEach(opt => { if(opt.checked) selected = opt.value; });
+      if (!selected) {
+        resultEl.innerHTML = '<span class="incorrect">Please select an option.</span>';
+        return;
+      }
+      resultEl.innerHTML = selected === 'correct'
+        ? '<span class="correct">Correct answer! Well done.</span>'
+        : '<span class="incorrect">Incorrect, please try again.</span>';
+    }
+  </script>
+</body>
+</html>
