@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Computer Basics & Digital Literacy Module</title>
+  <style>
+    :root {
+      --bg: #090e13;
+      --teal: #15e3c7;
+      --teal-hover: #17c1a6;
+      --white: #fff;
+      --card-dark: #10161b;
+      --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --btn-radius: 8px;
+    }
+    body {
+      margin: 0;
+      font-family: var(--main-font);
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+    }
+    header {
+      padding: 2rem 4vw 1rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      color: var(--teal);
+      margin-bottom: 0.25rem;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #bfeff6;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto 3rem;
+      padding: 0 1rem;
+    }
+    section.module {
+      background: var(--card-dark);
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.6rem;
+      border-radius: var(--btn-radius);
+      box-shadow: 0 0 10px #0b1e23;
+    }
+    section.module > h2 {
+      font-size: 1.7rem;
+      cursor: pointer;
+      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    section.module > h2 .arrow {
+      transition: transform 0.3s ease;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+    section.module.expanded > h2 .arrow {
+      transform: rotate(90deg);
+      color: var(--teal);
+    }
+    div.module-content {
+      margin-top: 1rem;
+      color: #ccc;
+      font-size: 1rem;
+      display: none;
+    }
+    section.module.expanded > div.module-content {
+      display: block;
+    }
+
+    /* Subtopic Accordion */
+    .subtopics {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 1rem;
+    }
+    .subtopics li {
+      background: #15232b;
+      border-radius: 5px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    .subtopics li .sub-arrow {
+      transition: transform 0.3s ease;
+      font-size: 1rem;
+      font-weight: bold;
+      color: var(--teal);
+    }
+    .subtopics li.expanded {
+      background: #1f3845;
+    }
+    .subtopics li.expanded .sub-arrow {
+      transform: rotate(90deg);
+    }
+    .sub-content {
+      background: #101b23;
+      border-radius: 0 0 5px 5px;
+      padding: 1rem 1.5rem;
+      margin-top: -8px;
+      color: #bcd3de;
+      display: none;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .subtopics li.expanded + .sub-content {
+      display: block;
+    }
+
+    /* Quiz Styles */
+    .quiz-question {
+      margin: 1rem 0 0.6rem;
+    }
+    .quiz-options label {
+      display: block;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+    }
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+    .quiz-btn {
+      background: var(--teal);
+      color: var(--bg);
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: var(--btn-radius);
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .quiz-btn:hover {
+      background: var(--teal-hover);
+      color: var(--white);
+    }
+    .quiz-result {
+      margin-top: 0.8rem;
+      font-weight: 600;
+    }
+    .correct {
+      color: #2ecc71;
+    }
+    .incorrect {
+      color: #e74c3c;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      main {
+        padding: 0 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Computer Basics & Digital Literacy</h1>
+    <p>Learn the fundamentals of computers and develop essential digital skills</p>
+  </header>
+  <main>
+    <section class="module">
+      <h2>1. Understanding Computers <span class="arrow">▶</span></h2>
+      <div class="module-content">
+        <ul class="subtopics">
+          <li>
+            What is a Computer? <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            A computer is an electronic device that processes data and instructions to complete tasks.
+            It can perform complex calculations, store vast data, and connect to networks.
+            At its core, it processes user input and produces output like text or images.
+          </div>
+
+          <li>
+            Types of Computers <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Computers vary from large desktops, laptops, tablets to smartphones.
+            Each type serves different purposes but operates on consistent principles.
+          </div>
+
+          <li>
+            Basic Parts of a Computer <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            <ul>
+              <li><b>CPU:</b> The brain that processes instructions.</li>
+              <li><b>Monitor:</b> Displays information visually.</li>
+              <li><b>Keyboard:</b> Device to input text.</li>
+              <li><b>Mouse:</b> Pointing device for navigation.</li>
+              <li><b>Storage Devices:</b> Save files long-term (HDD, SSD, USB).</li>
+            </ul>
+          </div>
+        </ul>
+
+        <div class="quiz-question">Why is the CPU called the brain of the computer?</div>
+        <div class="quiz-options">
+          <label><input type="radio" name="q1" value="correct" /> Because it processes all commands and data.</label>
+          <label><input type="radio" name="q1" value="wrong" /> Because it stores all data permanently.</label>
+          <label><input type="radio" name="q1" value="wrong" /> Because it is the physical center of the computer.</label>
+        </div>
+        <button class="quiz-btn" onclick="checkAnswer('q1')">Check Answer</button>
+        <div class="quiz-result" id="result-q1"></div>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2>2. Operating Systems <span class="arrow">▶</span></h2>
+      <div class="module-content">
+        <ul class="subtopics">
+          <li>
+            What is an Operating System (OS)? <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            OS manages hardware and software resources and provides services for computer programs.
+          </div>
+
+          <li>
+            Popular OS Examples <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Windows, macOS, Linux, and Android are popular operating systems.
+          </div>
+
+          <li>
+            Functions of an OS <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Managing files, running applications, controlling devices, and providing user interface.
+          </div>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2>3. Using Basic Software <span class="arrow">▶</span></h2>
+      <div class="module-content">
+        <ul class="subtopics">
+          <li>
+            Word Processors <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Programs like Microsoft Word and Google Docs let you create and format text documents.
+          </div>
+
+          <li>
+            Spreadsheets <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Programs like Excel and Google Sheets help organize and analyze data.
+          </div>
+
+          <li>
+            Presentation Software <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Tools like PowerPoint and Google Slides create slide shows for meetings and lessons.
+          </div>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2>4. File Management <span class="arrow">▶</span></h2>
+      <div class="module-content">
+        <ul class="subtopics">
+          <li>
+            Creating & Organizing Files <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Save files with proper names and group them in folders for easy access.
+          </div>
+
+          <li>
+            File Extensions <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            File extensions (.docx, .pdf, .jpg) indicate the file type and software to open it.
+          </div>
+
+          <li>
+            Recycle Bin & Backup <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Use the Recycle Bin to recover or delete files permanently.
+            Back up important data to external drives or cloud.
+          </div>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2>5. Introduction to the Internet <span class="arrow">▶</span></h2>
+      <div class="module-content">
+        <ul class="subtopics">
+          <li>
+            What is the Internet? <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            The internet is a global network connecting millions of devices, enabling communication and data sharing.
+          </div>
+
+          <li>
+            Web Browsers <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Programs like Chrome or Firefox let you access websites, watch videos, and use web applications.
+          </div>
+
+          <li>
+            Email Basics <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Creating email accounts, sending/receiving messages, attaching files, and online etiquette.
+          </div>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2>6. Digital Communication Tools <span class="arrow">▶</span></h2>
+      <div class="module-content">
+        <ul class="subtopics">
+          <li>
+            Messaging Apps <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Apps like WhatsApp and Messenger enable quick text and media communication.
+          </div>
+
+          <li>
+            Video Calling <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Tools like Zoom, Google Meet, or Skype connect people face-to-face virtually.
+          </div>
+
+          <li>
+            Social Media <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Share updates, photos, and join community groups responsibly on platforms like Facebook.
+          </div>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2>7. Internet Safety and Security <span class="arrow">▶</span></h2>
+      <div class="module-content">
+        <ul class="subtopics">
+          <li>
+            Creating Strong Passwords <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Use complex passwords with letters, numbers, and symbols to protect your accounts.
+          </div>
+
+          <li>
+            Recognizing Scams <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Be aware of phishing emails and suspicious websites that try to steal your info.
+          </div>
+
+          <li>
+            Software Updates & Antivirus <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Keep your system and antivirus software updated to protect against malware.
+          </div>
+
+          <li>
+            Safe Browsing Habits <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Avoid clicking unknown links or downloading files from untrusted sources.
+          </div>
+        </ul>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2>8. Productivity and Cloud Tools <span class="arrow">▶</span></h2>
+      <div class="module-content">
+        <ul class="subtopics">
+          <li>
+            Cloud Storage <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Services like Google Drive and OneDrive let you save and access files online from anywhere.
+          </div>
+
+          <li>
+            Real-time Collaboration <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Work with others on documents simultaneously improving teamwork and productivity.
+          </div>
+
+          <li>
+            Productivity Tools <span class="sub-arrow">▶</span>
+          </li>
+          <div class="sub-content">
+            Use online calendars, notes, and task management apps to organize your learning and projects.
+          </div>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Accordion toggle for main modules
+    document.querySelectorAll('section.module > h2').forEach(header => {
+      header.addEventListener('click', () => {
+        header.parentElement.classList.toggle('expanded');
+      });
+    });
+
+    // Accordion toggle for subtopics
+    document.querySelectorAll('.subtopics > li').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('expanded');
+      });
+    });
+
+    // Quiz answer checking
+    function checkAnswer(questionName) {
+      const options = document.getElementsByName(questionName);
+      let resultEl = document.getElementById('result-' + questionName);
+      let selected = null;
+      options.forEach(opt => {
+        if(opt.checked) selected = opt.value;
+      });
+      if(!selected) {
+        resultEl.innerHTML = '<span class="incorrect">Please select an option.</span>';
+        return;
+      }
+      if(selected === 'correct') {
+        resultEl.innerHTML = '<span class="correct">Correct answer! Well done.</span>';
+      } else {
+        resultEl.innerHTML = '<span class="incorrect">Incorrect, please try again.</span>';
+      }
+    }
+  </script>
+</body>
+</html>

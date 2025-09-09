@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Vidya Leen - Empowering Education</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #090e13;
+      --teal: #15e3c7;
+      --teal-hover: #17a1af;
+      --white: #fff;
+      --card-dark: #10161b;
+      --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --btn-radius: 8px;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--main-font);
+      background: var(--bg);
+      color: var(--white);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4vw;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .logo img {
+      width: 65px;
+      padding-right: 0;
+      margin-right: 0
+      ;
+    }
+
+    .logo-text {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 1px;
+    }
+
+    ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .sign-in-btn {
+      background: var(--teal);
+      color: var(--bg);
+      border: none;
+      padding: 0.5rem 1.1rem;
+      border-radius: var(--btn-radius);
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.17s, color 0.15s;
+      font-size: 1rem;
+      text-decoration: none;
+    }
+
+    .sign-in-btn:hover {
+      background: var(--teal-hover);
+      color: var(--white);
+    }
+
+    .language-select {
+      background: var(--card-dark);
+      color: var(--white);
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: var(--btn-radius);
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .language-select:hover {
+      background: var(--teal-hover);
+    }
+
+    .hero {
+      max-width: 850px;
+      margin: 4vw auto 0 auto;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .hero .teal {
+      color: var(--teal);
+    }
+
+    .hero p {
+      font-size: 1.13rem;
+      color: #bfeff6;
+      margin-bottom: 2rem;
+    }
+
+    .impact-btn {
+      background: var(--teal);
+      color: var(--bg);
+      border: none;
+      padding: 0.7rem 2rem;
+      border-radius: var(--btn-radius);
+      font-size: 1.18rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-bottom: 2.6rem;
+      transition: background 0.19s, color 0.14s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .impact-btn:hover {
+      background: var(--teal-hover);
+      color: var(--white);
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7vw;
+      justify-content: center;
+    }
+
+    .stat-block {
+      min-width: 140px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.1rem;
+      font-weight: 600;
+      color: var(--teal);
+    }
+
+    .stat-desc {
+      font-size: 1.01rem;
+      color: #bfeff6;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-left">
+      <span class="logo" role="img" aria-label="Vidya Leen Logo">
+      <img src="sih2.png" alt="logo">
+      </span>
+      <span class="logo-text">VIDYA LEEN</span>
+    </div>
+    <ul>
+      <li>
+        <select class="language-select" id="languageSwitcher" aria-label="Select Language">
+          <option value="en" selected>English</option>
+          <option value="hi">हिन्दी</option>
+          <option value="pa">ਪੰਜਾਬੀ</option>
+        </select>
+      </li>
+      <li><a href="signin.html" target="_blank" class="sign-in-btn" id="signinBtn">Sign In</a></li>
+    </ul>
+  </nav>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1 id="heroTitle">
+      <span class="teal" id="heroTitleHighlight">Empowering</span><br> rural education.
+    </h1>
+    <p id="heroSubtitle">
+      A smart e-Leraning platform where e means Everyone
+    </p>
+    <a href="makeImpact.html" id="impactBtn" target="_blank" class="impact-btn">Make an Impact</a>
+    <!-- Stats -->
+    <div class="stats" role="list" aria-label="Statistics">
+      <div class="stat-block" role="listitem">
+        <div class="stat-number" id="stat1">15k+</div>
+        <div class="stat-desc" id="statDesc1">Students reached</div>
+      </div>
+      <div class="stat-block" role="listitem">
+        <div class="stat-number" id="stat2">50+</div>
+        <div class="stat-desc" id="statDesc2">Communities supported</div>
+      </div>
+      <div class="stat-block" role="listitem">
+        <div class="stat-number" id="stat3">250+</div>
+        <div class="stat-desc" id="statDesc3">Schools engaged</div>
+      </div>
+    </div>
+  </section>
+  <script>
+    let impactWindow;
+
+    async function sendLanguageToPopup() {
+      if (impactWindow && !impactWindow.closed) {
+        const selectedLang = document.getElementById('languageSwitcher').value;
+        impactWindow.postMessage({ type: 'languageChanged', lang: selectedLang }, '*');
+      }
+    }
+
+    document.getElementById('impactBtn').addEventListener('click', function (e) {
+      e.preventDefault();
+      if (!impactWindow || impactWindow.closed) {
+        impactWindow = window.open(this.href, 'ImpactWindow', 'width=900,height=700');
+        // Use a small delay to ensure the popup loads before posting message
+        setTimeout(sendLanguageToPopup, 800);
+      } else {
+        impactWindow.focus();
+        sendLanguageToPopup();
+      }
+    });
+
+    const translations = {
+      en: {
+        signin: "Sign In",
+        titleHighlight: "Empowering",
+        titleRemainder: "rural education.",
+        subtitle: "A smart e-Leraning platform where e means Everyone",
+        impact: "Make an Impact",
+        stat1: "15k+",
+        statDesc1: "Students reached",
+        stat2: "50+",
+        statDesc2: "Communities supported",
+        stat3: "250+",
+        statDesc3: "Schools engaged"
+      },
+      hi: {
+        signin: "साइन इन",
+        titleHighlight: "सशक्तिकरण",
+        titleRemainder: "ग्रामीण शिक्षा।",
+        subtitle: "एक स्मार्ट ई-लरनिंग मंच जहां ई का अर्थ है एवरीवन",
+        impact: "प्रभाव डालें",
+        stat1: "१५ हजार+",
+        statDesc1: "छात्रों तक पहुँचा",
+        stat2: "५०+",
+        statDesc2: "समुदाय समर्थित",
+        stat3: "२५०+",
+        statDesc3: "विद्यालयों में भाग लिया"
+      },
+      pa: {
+        signin: "ਸਾਈਨ ਇਨ",
+        titleHighlight: "ਸਸ਼ਕਤਕਰਨ",
+        titleRemainder: "ਪਿੰਡਾਂ ਦੀ ਸਿੱਖਿਆ।",
+        subtitle: "ਇੱਕ ਸਮਾਰਟ ਈ-ਲਰਣਿੰਗ ਮੰਚ ਜਿੱਥੇ e ਦਾ ਮਤਲਬ ਹੈ ਹਰ ਕੋਈ",
+        impact: "ਅਸਰ ਪਾਉ",
+        stat1: "15 ਹਜ਼ਾਰ+",
+        statDesc1: "ਵਿਦਿਆਰਥੀਆਂ ਤੱਕ ਪਹੁੰਚ",
+        stat2: "50+",
+        statDesc2: "ਕਮਿਊਨਿਟੀਆਂ ਦਾ ਸਹਿਯੋਗ",
+        stat3: "250+",
+        statDesc3: "ਸਕੂਲਾਂ ਦਾ ਹਿੱਸਾ"
+      }
+    };
+
+    document.getElementById('languageSwitcher').addEventListener('change', function () {
+      const lang = this.value;
+      const t = translations[lang];
+      document.getElementById('signinBtn').textContent = t.signin;
+      // Set hero title with highlight span wrapping only the highlighted part
+      document.getElementById('heroTitle').innerHTML = `<span class="teal" id="heroTitleHighlight">${t.titleHighlight}</span><br>${t.titleRemainder}`;
+      document.getElementById('heroSubtitle').textContent = t.subtitle;
+      document.getElementById('impactBtn').textContent = t.impact;
+      document.getElementById('stat1').textContent = t.stat1;
+      document.getElementById('statDesc1').textContent = t.statDesc1;
+      document.getElementById('stat2').textContent = t.stat2;
+      document.getElementById('statDesc2').textContent = t.statDesc2;
+      document.getElementById('stat3').textContent = t.stat3;
+      document.getElementById('statDesc3').textContent = t.statDesc3;
+
+      sendLanguageToPopup();
+    });
+
+    // Initialize page with default language text on load
+    window.addEventListener('load', () => {
+      document.getElementById('languageSwitcher').dispatchEvent(new Event('change'));
+    });
+    let signinWindow = null;
+
+    function sendLanguageToSignin() {
+      if (signinWindow && !signinWindow.closed) {
+        const lang = document.getElementById('languageSwitcher').value;
+        signinWindow.postMessage({ type: 'languageChanged', lang }, '*');
+      }
+    }
+
+    document.getElementById('signinBtn').addEventListener('click', function (e) {
+      e.preventDefault();
+      if (!signinWindow || signinWindow.closed) {
+        signinWindow = window.open(this.href, 'SigninWindow', 'width=400,height=600');
+        // Allow some delay to let the page load
+        setTimeout(sendLanguageToSignin, 500);
+      } else {
+        signinWindow.focus();
+        sendLanguageToSignin();
+      }
+    });
+
+    document.getElementById('languageSwitcher').addEventListener('change', function () {
+      // Update main page translations (existing code)
+      const lang = this.value;
+      const t = {
+        en: { signin: "Sign In", /* other translations */ },
+        hi: { signin: "साइन इन", /* other translations */ },
+        pa: { signin: "ਸਾਈਨ ਇਨ", /* other translations */ }
+      }[lang] || {};
+
+      document.getElementById('signinBtn').textContent = t.signin || "Sign In";
+      // Your existing update code...
+
+      // Send language update to signin page
+      sendLanguageToSignin();
+    });
+
+    // On page load, initialize content and send message if popup opened
+    window.addEventListener('load', () => {
+      document.getElementById('languageSwitcher').dispatchEvent(new Event('change'));
+    });
+  </script>
+</body>
+
+</html>

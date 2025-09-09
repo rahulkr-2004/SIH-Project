@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Make Impact - Vidya Leen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #080e13;
+      --teal: #15e3c7;
+      --white: #fff;
+      --gray: #b9c6ce;
+      --font-family: 'Inter', Arial, Helvetica, sans-serif;
+      --btn-radius: 10px;
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-family);
+      background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(21,227,199,0.11), transparent 88%), var(--bg);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 45px;
+      box-sizing: border-box;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.01s;
+    }
+    body.visible {
+      visibility: visible;
+      opacity: 1;
+    }
+    h1 {
+      font-size: 2.8rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 1.5rem;
+      margin-top: 0;
+      text-align: center;
+      font-family: var(--font-family);
+    }
+    p {
+      font-size: 1.21rem;
+      color: var(--gray);
+      margin-bottom: 1.2rem;
+      margin-top: 0;
+      text-align: center;
+      line-height: 1.65;
+      font-family: var(--font-family);
+    }
+    strong {
+      color: var(--teal);
+      font-weight: 600;
+      letter-spacing: 0.1px;
+    }
+    .impact-btn {
+      display: inline-block;
+      margin: 2.1rem 0 2.7rem 0;
+      font-size: 1.17rem;
+      padding: 0.74em 2.6em;
+      border-radius: var(--btn-radius);
+      background: var(--teal);
+      color: #072124;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .16s, color .16s;
+      text-align: center;
+      outline: none;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      box-shadow: 0 2px 18px 0 rgba(21,227,199,0.11);
+    }
+    .impact-btn:hover {
+      background: #13baa8;
+      color: var(--white);
+    }
+    .contact {
+      margin-top: 2.8rem;
+      color: var(--gray);
+      font-size: 1.09rem;
+      text-align: center;
+      letter-spacing: 0.2px;
+    }
+    .contact a {
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.08rem;
+    }
+    .contact a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      p { font-size: 1rem; }
+      .impact-btn { font-size: 1rem; padding: 0.7em 1.7em; }
+    }
+  </style>
+</head>
+<body>
+  <h1 id="title"></h1>
+  <p id="para1"></p>
+  <p id="para2"></p>
+  <p id="para3"></p>
+  <a id="impactBtn" class="impact-btn" href="mailto:principallncts@lnct.ac.in" style="display:none;"></a>
+  <div class="contact">
+    <p id="contact-label"></p>
+    <p><a href="mailto:principallncts@lnct.ac.in" id="email"></a></p>
+  </div>
+  <script>
+    const translations = {
+      en: {
+        title: 'Make Impact',
+        para1: 'Join <strong>Vidya Leen</strong> in transforming rural education by empowering students and communities through innovative digital learning solutions.',
+        para2: 'Your support and involvement can help bridge the educational divide and create lasting positive change where it matters most.',
+        para3: 'Together, we can provide quality learning opportunities, enhance digital literacy, and inspire a new generation of learners.',
+        contactLabel: 'Contact:',
+        btn: 'Make an Impact',
+        email: 'principallncts@lnct.ac.in'
+      },
+      hi: {
+        title: 'प्रभाव डालें',
+        para1: 'विद्या लीन के साथ मिलकर ग्रामीण शिक्षा को बदलें, छात्रों और समुदायों को नवाचार डिजिटल समाधान के माध्यम से सशक्त बनाएं।',
+        para2: 'आपका समर्थन और भागीदारी शैक्षिक असमानता को कम करने तथा स्थायी सकारात्मक बदलाव लाने में सहायक है।',
+        para3: 'हम मिलकर गुणवत्तापूर्ण सीखने के अवसर प्रदान कर सकते हैं, डिजिटल साक्षरता बढ़ा सकते हैं और नई पीढ़ी को प्रेरित कर सकते हैं।',
+        contactLabel: 'संपर्क:',
+        btn: 'प्रभाव डालें',
+        email: 'principallncts@lnct.ac.in'
+      },
+      pa: {
+        title: 'ਅਸਰ ਪਾਉਣਾ',
+        para1: 'ਵੀਦ੍ਯਾ ਲੀਨ ਦੇ ਨਾਲ ਮਿਲ ਕੇ ਪਿੰਡਾਂ ਵਿੱਚ ਸਿੱਖਿਆ ਨੂੰ ਬਦਲੋ, ਵਿਦਿਆਰਥੀਆਂ ਅਤੇ ਕਮਿਉਨਿਟੀ ਨੂੰ ਨਵੇਂ ਡਿਜਿਟਲ ਸਿੱਖਿਆ ਦੇ ਤਜਰਬੇ ਨਾਲ ਸਸ਼ਕਤ ਬਨਾਓ।',
+        para2: 'ਤੁਹਾਡੇ ਸਹਿਯੋਗ ਨਾਲ ਅਸੀਂ ਸਿੱਖਿਆ ਦੀ ਪਹੁੰਚ ਬਹਾਲ ਕਰਦੇ ਹੋਏ ਡੂੰਘੀਆਂ ਅਸਮਾਨਤਾਵਾਂ ਹਟਾਵਾਂਗੇ।',
+        para3: 'ਅਸੀਂ ਮਿਲ ਕੇ ਬਿਹਤਰ ਸਿੱਖਣ ਦੇ ਮੌਕੇ ਪ੍ਰਦਾਨ ਕਰਦੇ ਹਾਂ ਅਤੇ ਨਵੀਂ ਪੀੜ੍ਹੀ ਨੂੰ ਪ੍ਰੇਰਿਤ ਕਰਦੇ ਹਾਂ।',
+        contactLabel: 'ਸੰਪਰਕ:',
+        btn: 'ਅਸਰ ਪਾਉ',
+        email: 'principallncts@lnct.ac.in'
+      }
+    };
+    function translatePage(lang) {
+      const t = translations[lang] || translations.en;
+      document.getElementById('title').innerHTML = t.title;
+      document.getElementById('para1').innerHTML = t.para1;
+      document.getElementById('para2').innerHTML = t.para2;
+      document.getElementById('para3').innerHTML = t.para3;
+      document.getElementById('contact-label').textContent = t.contactLabel;
+      const emailEl = document.getElementById('email');
+      emailEl.textContent = t.email;
+      emailEl.href = `mailto:${t.email}`;
+      const btn = document.getElementById('impactBtn');
+      btn.textContent = t.btn;
+      btn.href = `mailto:${t.email}`;
+      btn.style.display = 'inline-block';
+      if (!document.body.classList.contains('visible')) {
+        document.body.classList.add('visible');
+      }
+    }
+    window.addEventListener('message', (event) => {
+      if (event.data?.type === 'languageChanged') {
+        translatePage(event.data.lang);
+      }
+    });
+    // Do not show any content until a language is sent; fallback to English after 2s
+    setTimeout(() => {
+      if (!document.body.classList.contains('visible')) translatePage('en');
+    }, 2000);
+  </script>
+</body>
+</html>
